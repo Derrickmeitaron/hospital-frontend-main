@@ -106,7 +106,13 @@ export default function Login({ setRole, setView }) {
 
       <div
         className={`login-card ${error ? "error-shake" : ""}`}
-        style={{ maxWidth: "350px", margin: "100px auto" }}
+        style={{
+          width: "100%",
+          maxWidth: "420px",
+          margin: "40px auto",
+          padding: "15px",
+          boxSizing: "border-box"
+        }}
       >
         <div style={styles.card}>
           <h2 style={styles.title}>🏥 Hospital System Login</h2>
@@ -127,7 +133,7 @@ export default function Login({ setRole, setView }) {
           <div style={styles.inputGroup}>
             <label style={styles.label}>Password</label>
 
-            <div style={{ display: "flex", gap: "10px" }}>
+            <div style={styles.passwordRow}>
               <input
                 className="rainbow-input"
                 style={styles.passwordInput}
@@ -173,11 +179,12 @@ export default function Login({ setRole, setView }) {
 
 const styles = {
   card: {
-    width: "360px",
-    padding: "30px",
-    borderRadius: "14px",
+    width: "100%",
+    padding: "clamp(20px, 5vw, 35px)",
+    borderRadius: "18px",
     background: "#fff",
-    boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
+    boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
+    boxSizing: "border-box"
   },
   title: { textAlign: "center" },
   subtitle: { textAlign: "center", fontSize: "13px", color: "#666" },
@@ -186,26 +193,38 @@ const styles = {
 
   input: {
     width: "100%",
-    padding: "11px",
-    borderRadius: "8px",
-    border: "1px solid #ccc"
+    padding: "12px",
+    borderRadius: "10px",
+    border: "1px solid #ccc",
+    boxSizing: "border-box",
+    fontSize: "16px"
+  },
+  passwordRow: {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px"
   },
 
   passwordInput: {
     flex: 1,
-    padding: "11px",
-    borderRadius: "8px",
-    border: "1px solid #ccc"
+    padding: "12px",
+    borderRadius: "10px",
+    border: "1px solid #ccc",
+    fontSize: "16px",
+    boxSizing: "border-box"
   },
 
   toggleOutside: {
-    padding: "10px",
-    borderRadius: "8px",
+    width: "70px",
+    height: "44px",
+    borderRadius: "10px",
     border: "1px solid #2563eb",
     background: "#fff",
-    color: "#2563eb"
+    color: "#2563eb",
+    cursor: "pointer",
+    fontSize: "13px",
+    flexShrink: 0
   },
-
   button: {
     width: "100%",
     padding: "12px",
