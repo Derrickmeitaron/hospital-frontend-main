@@ -82,13 +82,28 @@ function App() {
     notes.dx.trim().length > 0;
 
   useEffect(() => {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
     const load = async () => {
-      const res = await getMedicines();
-      setMedicines(res?.data || []);
+      try {
+
+        const res = await getMedicines();
+
+        setMedicines(res?.data || []);
+
+      } catch (err) {
+
+        console.error("Medicines load failed:", err);
+
+      }
     };
 
     load();
-  }, []);
+
+  }, [role]);
 
   // =========================
   // AUTH INITIALIZATION
@@ -949,44 +964,44 @@ function App() {
       />
 
       <div className="app-content">
-{(role === "admin" || role === "pharmacy") && (
-  <div
-    className="card"
-    style={{
-      margin: "20px",
-      display: "flex",
-      gap: "10px",
-      flexWrap: "wrap"
-    }}
-  >
+        {(role === "admin" || role === "pharmacy") && (
+          <div
+            className="card"
+            style={{
+              margin: "20px",
+              display: "flex",
+              gap: "10px",
+              flexWrap: "wrap"
+            }}
+          >
 
-    {role === "admin" && (
-      <>
-        <button onClick={() => setView("dashboard")}>
-          Dashboard
-        </button>
+            {role === "admin" && (
+              <>
+                <button onClick={() => setView("dashboard")}>
+                  Dashboard
+                </button>
 
-        <button onClick={() => setView("admin")}>
-          Admin
-        </button>
+                <button onClick={() => setView("admin")}>
+                  Admin
+                </button>
 
-        <button onClick={() => setView("medicines")}>
-          Medicines
-        </button>
+                <button onClick={() => setView("medicines")}>
+                  Medicines
+                </button>
 
-        <button onClick={() => setView("stock")}>
-          Stock Movements
-        </button>
-      </>
-    )}
+                <button onClick={() => setView("stock")}>
+                  Stock Movements
+                </button>
+              </>
+            )}
 
-    <button onClick={() => setView("pharmacy")}>
-      Pharmacy
-    </button>
+            <button onClick={() => setView("pharmacy")}>
+              Pharmacy
+            </button>
 
-    <button onClick={() => setView("sales")}>
-      Sales
-    </button>
+            <button onClick={() => setView("sales")}>
+              Sales
+            </button>
 
           </div>
         )}
